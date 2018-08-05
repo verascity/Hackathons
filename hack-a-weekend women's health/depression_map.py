@@ -6,6 +6,7 @@ Created on Sun Aug  5 11:05:32 2018
 """
 
 import pandas as pd
+import numpy as np
 import plotly.plotly as py
 
 df = pd.read_csv('depressionstats.csv')
@@ -19,8 +20,14 @@ df['Fpct'] = df['Fpct'].str.rstrip('%').astype('float')
 df = df.loc[df['Year'].isin([2002, 2014])]
 df = df.loc[df['Code'].str.len() == 3]
 
+def calc_trend(df):
+    for country in np.unique(df['Country']):
+        first = df.loc[(df['Country'] == country) & (df['Year'] == 2002)]
+        second = df.loc[(df['Country'] == country) & (df['Year'] == 2014)]
+        return round(float(second['Fpct']) - float(first['Fpct']), 2)
+        
 
-print(df)
+
 
 
 #Skeleton cloropleth code from Plotly website
