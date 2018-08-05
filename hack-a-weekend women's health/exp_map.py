@@ -6,11 +6,20 @@ Created on Sun Aug  5 15:46:25 2018
 """
 
 import pandas as pd
-import numpy as np
 import plotly.plotly as py
 
 df = pd.read_csv('expenditurestats.csv')
+df.rename(index=str, columns={'Entity':'Country',
+           'Health expenditure, public (% of GDP) (% of GDP)':'Public',
+           'Health expenditure, private (% of GDP) (% of GDP)':'Private'}, inplace=True)
 
+
+def total_exp(row):
+    return row['Public'] + row['Private']
+
+df['Total'] = df.apply(total_exp, axis=1)
+
+print(df.head())
 
 
 '''data = [ dict(
