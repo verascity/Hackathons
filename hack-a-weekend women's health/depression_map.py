@@ -31,39 +31,33 @@ def calc_trend(df):
      
     return pd.Series(trend)
 
-
 trend = calc_trend(df)
-
 df = df.loc[df['Year'] == 2014]
 df.loc[:,'Trend'] = trend.values
 print(df.head(20))
 
-
-#Skeleton cloropleth code from Plotly website
-'''data = [ dict(
+data = [ dict(
         type = 'choropleth',
-        locations = df['CODE'],
-        z = df['GDP (BILLIONS)'],
-        text = df['COUNTRY'],
-        colorscale = [[0,"rgb(5, 10, 172)"],[0.35,"rgb(40, 60, 190)"],[0.5,"rgb(70, 100, 245)"],\
-            [0.6,"rgb(90, 120, 245)"],[0.7,"rgb(106, 137, 247)"],[1,"rgb(220, 220, 220)"]],
+        locations = df['Code'],
+        z = df['Trend'],
+        text = df['Country'],
+        colorscale = [[0,"rgb(24, 24, 24)"],[0.35,"rgb(44, 70, 39)"],[0.5,"rgb(64, 116, 55)"],\
+            [0.6,"rgb(84, 162, 70)"],[0.7,"rgb(104, 208, 86)"],[1,"rgb(124, 255, 102)"]],
         autocolorscale = False,
         reversescale = True,
         marker = dict(
             line = dict (
-                color = 'rgb(180,180,180)',
-                width = 0.5
+                color = 'rgb(0,0,0)',
+                width = 0.75
             ) ),
         colorbar = dict(
             autotick = False,
-            tickprefix = '$',
-            title = 'GDP<br>Billions US$'),
+            ticksuffix = '%',
+            title = 'Change in<br>Percentage'),
       ) ]
 
 layout = dict(
-    title = '2014 Global GDP<br>Source:\
-            <a href="https://www.cia.gov/library/publications/the-world-factbook/fields/2195.html">\
-            CIA World Factbook</a>',
+    title = 'Global Trends in Population Statistics of Depressed Women, 2002-2014<br>(As Change in Percentage of total Female Population)',
     geo = dict(
         showframe = False,
         showcoastlines = False,
@@ -74,4 +68,4 @@ layout = dict(
 )
 
 fig = dict( data=data, layout=layout )
-py.iplot( fig, validate=False, filename='d3-world-map' )'''
+py.plot(fig, validate=False, filename='d1-world-map' )
