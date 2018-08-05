@@ -21,13 +21,22 @@ df = df.loc[df['Year'].isin([2002, 2014])]
 df = df.loc[df['Code'].str.len() == 3]
 
 def calc_trend(df):
+    
+    trend = []
+    
     for country in np.unique(df['Country']):
-        first = df.loc[(df['Country'] == country) & (df['Year'] == 2002)]
-        second = df.loc[(df['Country'] == country) & (df['Year'] == 2014)]
-        return round(float(second['Fpct']) - float(first['Fpct']), 2)
-        
+       first = df.loc[(df['Country'] == country) & (df['Year'] == 2002)]
+       second = df.loc[(df['Country'] == country) & (df['Year'] == 2014)]
+       trend.append(round(float(second['Fpct']) - float(first['Fpct']), 2))
+     
+    return pd.Series(trend)
 
 
+trend = calc_trend(df)
+
+df = df.loc[df['Year'] == 2014]
+df.loc[:,'Trend'] = trend.values
+print(df.head(20))
 
 
 #Skeleton cloropleth code from Plotly website
