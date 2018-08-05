@@ -11,13 +11,17 @@ import plotly.plotly as py
 df = pd.read_csv('depressionstats.csv')
 
 df = df[['Entity', 'Year', 'Code', 'Percentage of Female Suffering from Depression']]
-df.rename(index=str, columns={'Entity':'Country',
-           'Percentage of Female Suffering from Depression':'Fpct'}, inplace=True)
+df = df.rename(index=str, columns={'Entity':'Country',
+           'Percentage of Female Suffering from Depression':'Fpct'})
 df['Fpct'] = df['Fpct'].str.rstrip('%').astype('float')
 
 
-print(df.head(10))
-print(df.dtypes)
+df = df.loc[df['Year'].isin([2002, 2014])]
+df = df.loc[df['Code'].str.len() == 3]
+
+
+print(df)
+
 
 #Skeleton cloropleth code from Plotly website
 '''data = [ dict(
