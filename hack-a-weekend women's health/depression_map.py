@@ -6,9 +6,18 @@ Created on Sun Aug  5 11:05:32 2018
 """
 
 import pandas as pd
-import plotly.plotlyplotly as py
+import plotly.plotly as py
 
 df = pd.read_csv('depressionstats.csv')
+
+df = df[['Entity', 'Year', 'Code', 'Percentage of Female Suffering from Depression']]
+df.rename(index=str, columns={'Entity':'Country',
+           'Percentage of Female Suffering from Depression':'Fpct'}, inplace=True)
+df['Fpct'] = df['Fpct'].str.rstrip('%').astype('float')
+
+
+print(df.head(10))
+print(df.dtypes)
 
 #Skeleton cloropleth code from Plotly website
 '''data = [ dict(
