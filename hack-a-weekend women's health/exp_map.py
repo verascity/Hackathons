@@ -23,7 +23,7 @@ def total_exp(row):
 
 df['Total'] = df.apply(total_exp, axis=1)
 
-
+df = df.drop(index=['1564', '3125']) #buggy lines that were messing everything up
 df['Total'] = df['Total'].astype('float')
 
 df = df[['Country', 'Code', 'Year', 'Total']]
