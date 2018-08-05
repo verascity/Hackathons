@@ -45,9 +45,7 @@ def calc_trend(df):
 trend = calc_trend(df)
 df = df.loc[df['Year'] == 2014]
 df.loc[:,'Trend'] = trend.values
-print(df.head(20))
 
-'''
 data = [ dict(
         type = 'choropleth',
         locations = df['Code'],
@@ -69,7 +67,7 @@ data = [ dict(
       ) ]
 
 layout = dict(
-    title = 'Global Trends in Population Statistics of Depressed Women, 2002-2014<br>(As Change in Percentage of total Female Population)',
+    title = 'Global Trends in Health Expenditures, 2002-2014<br>(As Change in % of GDP For Total Health Expenditures)',
     geo = dict(
         showframe = False,
         showcoastlines = False,
@@ -80,4 +78,4 @@ layout = dict(
 )
 
 fig = dict( data=data, layout=layout )
-py.plot(fig, validate=False, filename='d1-world-map' )'''
+py.plot(fig, validate=False, filename='d2-world-map' )
